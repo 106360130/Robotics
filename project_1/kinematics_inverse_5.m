@@ -15,6 +15,10 @@ function theta = kinematics_inverse_5(T)
     r = t + a(1);  %因為"theta(1)"轉180度
     s = abs(Z_c);
     D = (s^2 + r^2 - a(2)^2 - a(3)^2) / (2*a(2)*a(3));
+    if(1-D^2 < 0)  %表示已經錯誤，超過工作範圍
+        theta = 2*pi*ones(6, 1);
+        return
+    end
     theta(3) = atan2((1-D^2)^0.5, D);
 
 

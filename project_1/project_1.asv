@@ -48,41 +48,40 @@ theta_inverse_5 = kinematics_inverse_5(T_input)*(180/pi);
 theta_inverse_6 = kinematics_inverse_6(T_input)*(180/pi);
 theta_inverse_7 = kinematics_inverse_7(T_input)*(180/pi);
 theta_inverse_8 = kinematics_inverse_8(T_input)*(180/pi);
-%inverse kinematics
 
-
-%print result
 theta_output = [theta_inverse_1'; theta_inverse_2'; theta_inverse_3'; theta_inverse_4';
     theta_inverse_5'; theta_inverse_6'; theta_inverse_7'; theta_inverse_8'];
-fprintf('\n\nInverse Kinematic : \n');
+%inverse kinematics
 
-for i 
-fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
-theta_inverse_1'
+%check angels
+error_output = " ";
+angle_limit = [-150, 150; -30, 100; -120, 0; -110, 110; -180, 180; -180, 180];
+for i = 1:8
 
-fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
-theta_inverse_2'
+    temp = " ";
+    for j = 1:6
+        if(theta_output(i, j) < angle_limit(j, 1) || theta_output(i, j) > angle_limit(j, 2))
+            temp = temp + string(j) + " ";
+        end
+    end
 
-fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
-theta_inverse_3'
-
-fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
-theta_inverse_4'
-
-fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
-theta_inverse_5'
-
-fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
-theta_inverse_6'
-
-fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
-theta_inverse_7'
-
-fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
-theta_inverse_8'
-%print result
-test = [theta_inverse_8' ;theta_inverse_8']
-for i = 1:2
-    fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
-    test(i, :)
+    error_output = [error_output; temp];
+ 
 end
+%check angels
+
+
+%print result
+fprintf('\n\nInverse Kinematic : ');
+
+for i = 1:8
+    fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
+    theta_output(i, :)
+    
+    if(error_output(i+1, 1) ~= " ")
+       fprintf('    joint %s out of range\n', error_output(i+1, 1)); 
+    end
+end
+%print result
+
+
