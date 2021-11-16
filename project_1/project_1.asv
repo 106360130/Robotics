@@ -54,12 +54,35 @@ theta_inverse_8 = kinematics_inverse_8(T_input)*(180/pi);
 %print result
 theta_output = [theta_inverse_1'; theta_inverse_2'; theta_inverse_3'; theta_inverse_4';
     theta_inverse_5'; theta_inverse_6'; theta_inverse_7'; theta_inverse_8'];
-fprintf('\n\nInverse Kinematic : ');
+fprintf('\n\nInverse Kinematic : \n');
 
-for i = 1:8
+for i 
+fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
+theta_inverse_1'
+
+fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
+theta_inverse_2'
+
+fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
+theta_inverse_3'
+
+fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
+theta_inverse_4'
+
+fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
+theta_inverse_5'
+
+fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
+theta_inverse_6'
+
+fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
+theta_inverse_7'
+
+fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
+theta_inverse_8'
+%print result
+test = [theta_inverse_8' ;theta_inverse_8']
+for i = 1:2
     fprintf('\n\n[theta1  theta2  theta3  theta4  theta5  theta6]\n');
-    theta_output(i, :)
+    test(i, :)
 end
-
-
-

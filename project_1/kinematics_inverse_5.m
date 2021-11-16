@@ -2,20 +2,17 @@ function theta = kinematics_inverse_5(T)
     a = [0.12, 0.25, 0.26, 0, 0, 0];
     theta = zeros(6, 1);
     
-    X_c = -T(1, 4);
-    Y_c = -T(2, 4);
+    X_c = T(1, 4);
+    Y_c = T(2, 4);
     Z_c = T(3, 4);
 
     %find theta1
-    theta(1) = atan2(Y_c, X_c);
-    %temp_1 = atan2(Y_c, X_c);
-    %temp_2 = atan2(0, -(X_c^2 + Y_c^2)^0.5);
-    %theta(1) = temp_1 + temp_2;
-    
+    theta(1) = atan2(-Y_c, -X_c);
+
 
     %find theta3
     t = (X_c^2 + Y_c^2)^0.5;
-    r = t - a(1);
+    r = t + a(1);  %因為"theta(1)"轉180度
     s = abs(Z_c);
     D = (s^2 + r^2 - a(2)^2 - a(3)^2) / (2*a(2)*a(3));
     theta(3) = atan2((1-D^2)^0.5, D);
@@ -24,7 +21,7 @@ function theta = kinematics_inverse_5(T)
     %find theta2
     temp_1 = atan2(s, r);  %Alpha
     temp_2 = atan2(a(3)*sin(theta(3)), a(2) + a(3)*cos(theta(3)));  %Beta
-    theta(2) = temp_1 - temp_2;
+    theta(2) = pi - (temp_1 + temp_2);  %"theta(3)"為負
 
     %find theta5
     r13 = T(1, 3);
