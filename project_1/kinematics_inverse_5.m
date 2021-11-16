@@ -2,14 +2,16 @@ function theta = kinematics_inverse_5(T)
     a = [0.12, 0.25, 0.26, 0, 0, 0];
     theta = zeros(6, 1);
     
-    X_c = T(1, 4);
-    Y_c = T(2, 4);
+    X_c = -T(1, 4);
+    Y_c = -T(2, 4);
     Z_c = T(3, 4);
 
     %find theta1
-    temp_1 = (X_c^2 + Y_c^2)^0.5;
-    temp_2 = 0;  % d = 0
-    theta(1) = atan2(Y_c, X_c) + atan2(-temp_2, -temp_1);
+    theta(1) = atan2(Y_c, X_c);
+    %temp_1 = atan2(Y_c, X_c);
+    %temp_2 = atan2(0, -(X_c^2 + Y_c^2)^0.5);
+    %theta(1) = temp_1 + temp_2;
+    
 
     %find theta3
     t = (X_c^2 + Y_c^2)^0.5;
